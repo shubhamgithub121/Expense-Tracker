@@ -12,7 +12,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://expense-backend-sand.vercel.app/data");
+        const response = await axios.get("https://expense-backend-sand.vercel.app/api/data");
 
         console.log(response.data);
 
@@ -33,7 +33,7 @@ const App = () => {
   const addExpense = async (newExpense) => {
     try {
       const expenseData = { ...newExpense, id: Date.now() };
-      const response = await axios.post("https://expense-backend-sand.vercel.app/add-expense", expenseData);
+      const response = await axios.post("https://expense-backend-sand.vercel.app/api/add-expense", expenseData);
       const data = response.data;
 
       console.log("Expense added:", data);
@@ -48,7 +48,7 @@ const App = () => {
   // 📌 Income update karne ka function (backend me bhi update hoga)
   const addIncome = async (newIncome) => {
     try {
-      const response = await axios.put("https://expense-backend-sand.vercel.app/update-income", { newIncome }); // ✅ Fix: Correct request body
+      const response = await axios.put("https://expense-backend-sand.vercel.app/api/update-income", { newIncome }); // ✅ Fix: Correct request body
       const data = response.data;
 
       console.log("Updated income:", data);
@@ -64,7 +64,7 @@ const App = () => {
   // 📌 Expense delete karna (backend se bhi delete hoga)
   const deleteExpense = async (id) => {
     try {
-      await axios.delete(`https://expense-backend-sand.vercel.app/delete-expense/${id}`);
+      await axios.delete(`https://expense-backend-sand.vercel.app/api/delete-expense/${id}`);
 
       setExpenses((prevExpenses) => prevExpenses.filter((expense) => expense.id !== id));
       toast.error("Expense deleted!");
